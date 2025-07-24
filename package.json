@@ -5,7 +5,7 @@
   "type": "commonjs",
   "scripts": {
     "dev": "vite",
-    "build": "tsc ",
+    "build": "tsc",
     "build:server": "tsc -p tsconfig.node.json",
     "lint": "eslint .",
     "preview": "vite preview",
