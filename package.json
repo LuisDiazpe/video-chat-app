@@ -2,13 +2,14 @@
   "name": "video-chat-app",
   "private": true,
   "version": "1.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:server": "tsc -p tsconfig.node.json",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "tsc && node dist/index.js"
+    "start": "tsc && node dist/server/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
