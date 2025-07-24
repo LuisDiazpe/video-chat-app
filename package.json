@@ -9,7 +9,7 @@
     "build:server": "tsc -p tsconfig.node.json",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "tsc && node dist/server/index.js"
+    "start": "tsc && node --max-old-space-size=512 dist/server/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
