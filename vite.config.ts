@@ -8,4 +8,8 @@ export default defineConfig({
     port: 5173,
     allowedHosts: ['redbird-fair-urgently.ngrok-free.app'],
   },
+  build: {
+    outDir: '../dist/client', // ⬅ importante: fuera de `frontend`
+    emptyOutDir: false,        // ⬅ para no borrar tu `dist/server`
+  },
 })

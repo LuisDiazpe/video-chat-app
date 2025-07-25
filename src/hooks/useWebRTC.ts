@@ -19,51 +19,67 @@ export const useWebRTC = () => {
 
     useEffect(() => {
         const myPeer = new Peer('peer-' + Math.random().toString(36).substring(7), {
-            host: 'redbird-fair-urgently.ngrok-free.app',
+            host: 'localhost',
             port: 9000,
             path: '/peerjs',
-            secure: true,
-            config: {
-                iceServers: [
-                    { urls: 'stun:stun.l.google.com:19302' }
-                ]
-            }
+            secure: false,
         });
 
         myPeer.on('open', (id) => {
-            console.log('Mi Peer ID es:', id);
+            console.log('%c✅ PeerJS abierto con ID:', 'color: green; font-weight: bold;', id);
             setPeerId(id);
         });
 
+        myPeer.on('error', (err) => {
+            console.error('❌ Error en PeerJS:', err);
+        });
+
+        if (!peer) {
+            console.error('Peer no está inicializado');
+            return;
+        }
+
         myPeer.on('call', async (call) => {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-            call.answer(stream);
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                call.answer(stream);
 
-            if (localVideoRef.current) localVideoRef.current.srcObject = stream;
+                if (localVideoRef.current) localVideoRef.current.srcObject = stream;
 
-            call.on('stream', (remoteStream) => {
-                if (remoteVideoRef.current) remoteVideoRef.current.srcObject = remoteStream;
-            });
+                call.on('stream', (remoteStream) => {
+                    if (remoteVideoRef.current) remoteVideoRef.current.srcObject = remoteStream;
+                });
 
-            setCallObject(call);
+                setCallObject(call);
+            } catch (err) {
+                console.error('🎥 Error al obtener media para contestar llamada:', err);
+            }
         });
 
         setPeer(myPeer);
     }, []);
 
     const callPeer = async (otherPeerId: string) => {
-        if (!peer) return;
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        if (!peer) {
+            console.warn('⚠️ Intentaste llamar pero Peer aún no está listo');
+            return;
+        }
 
-        if (localVideoRef.current) localVideoRef.current.srcObject = stream;
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
 
-        const call = peer.call(otherPeerId, stream);
+            if (localVideoRef.current) localVideoRef.current.srcObject = stream;
 
-        call.on('stream', (remoteStream) => {
-            if (remoteVideoRef.current) remoteVideoRef.current.srcObject = remoteStream;
-        });
+            const call = peer.call(otherPeerId, stream);
 
-        setCallObject(call);
+            call.on('stream', (remoteStream) => {
+                if (remoteVideoRef.current) remoteVideoRef.current.srcObject = remoteStream;
+            });
+
+            setCallObject(call);
+        } catch (err) {
+            console.error('📞 Error al iniciar llamada:', err);
+        }
     };
 
     const muteAudio = () => {
