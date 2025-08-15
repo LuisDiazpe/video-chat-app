@@ -9,7 +9,7 @@ export function useAudioPeer() {
     const [connected, setConnected] = useState(false);
     const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
 
-    // Opcional: Tu clave para firma
+
     const signingKeyRef = useRef<CryptoKey | null>(null);
 
     // Generar clave para firma
@@ -28,7 +28,7 @@ export function useAudioPeer() {
 
     }
 
-    // Iniciar micrófono y codificar con Opus
+    // Iniciar micrfono y codificar con opus
     async function startLocalStream() {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         localStreamRef.current = stream;
@@ -59,7 +59,7 @@ export function useAudioPeer() {
         setMediaRecorder(recorder);
     }
 
-    // Inicializar conexión WebRTC
+    // Inicializar conexin WebRTC
     async function initConnection(isCaller: boolean) {
         const pc = new RTCPeerConnection();
         peerConnectionRef.current = pc;
@@ -77,14 +77,14 @@ export function useAudioPeer() {
 
         pc.onicecandidate = (e) => {
             if (e.candidate) {
-                // Aquí deberías enviar la candidate por WebSocket
+
                 console.log("ICE:", e.candidate);
             }
         };
 
         const offer = await pc.createOffer();
         await pc.setLocalDescription(offer);
-        // Enviar `offer` por WebSocket
+        // Enviar offer por WebSocket
     }
 
     function setupDataChannel(channel: RTCDataChannel) {
@@ -94,7 +94,7 @@ export function useAudioPeer() {
             const payload = JSON.parse(event.data);
             const audioBuffer = new Uint8Array(payload.audio);
 
-            // Validar firma si quieres
+            // Validar firma
             // const isValid = await crypto.subtle.verify(...)
 
             // Reproducir

@@ -19,7 +19,7 @@ const peerServer = ExpressPeerServer(server, {
     allow_discovery: true
 });
 
-// Ruta para el servidor de PeerJS
+
 app.use('/peerjs', peerServer);
 
 // Logs
@@ -31,12 +31,12 @@ peerServer.on('disconnect', (client) => {
     console.log(`❌ Peer desconectado: ${client.getId()}`);
 });
 
-// Endpoint raíz de prueba
+// Endpoint de prueba
 app.get('/', (req, res) => {
     res.send('Servidor PeerJS funcionando correctamente 🚀');
 });
 
-// Puerto configurado por entorno o fallback local
+// Puerto configurado por entorno
 const PORT = process.env.PORT || 9000;
 server.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
