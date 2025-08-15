@@ -12,9 +12,13 @@
     "start": "node dist/server/index.js"
   },
   "dependencies": {
+    "@discordjs/opus": "^0.10.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "libopus.js": "^0.0.1",
+    "opus-encdec": "^0.1.1",
+    "opus-media-recorder": "^0.8.0",
     "peer": "^1.0.2",
     "peerjs": "^1.5.5",
     "react": "^19.1.0",
@@ -28,8 +32,10 @@
     "@types/cors": "^2.8.19",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.3",
+    "@types/peerjs": "^0.0.30",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "@types/webrtc": "^0.0.46",
     "@vitejs/plugin-react": "^4.6.0",
     "eslint": "^9.30.1",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -37,6 +43,7 @@
     "globals": "^16.3.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
-    "vite": "^7.0.5"
+    "vite": "^7.0.5",
+    "vite-plugin-static-copy": "^3.1.1"
   }
 }

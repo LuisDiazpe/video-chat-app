@@ -42,3 +42,4 @@ server.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
     console.log(`👉 PeerJS disponible en http://localhost:${PORT}/peerjs`);
 });
+(window as any).global = window;

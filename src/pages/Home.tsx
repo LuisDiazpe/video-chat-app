@@ -5,7 +5,7 @@ import VideoChat from '../components/VideoChat';
 const Home: React.FC = () => {
     return (
         <div>
-            <h1>Bienvenido al sistema de videollamadas</h1>
+            <h1>Bienvenido a mi sistema de videollamadas que tumbara whatsapp</h1>
             <VideoChat />
         </div>
     );

@@ -5,7 +5,8 @@
     "outDir": "./dist/server",
     "rootDir": "./server",
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
   "include": ["server"]
 }
